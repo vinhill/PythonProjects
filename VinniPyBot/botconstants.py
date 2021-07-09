@@ -15,17 +15,17 @@ Anyone:
 /help - show this tip
 /authorize <token> - authorize for usage of this bot
 /decide <a> or <b> or <c> or ... - returns a random choice of the given options
+/ping - check if bot is available
+/about - general information
 
 Authorized user:
 /restart - restarts your python session (use it in case something is broken)
-/ping - check if bot is available
-/about - general information
 
 Admin:
 /reset - restarts all sessions and resets authorization information
 /usertoken <token> defines the current usertoken
 
-You may use commands like:
+As user / admin, you may use commands like:
 
 print('Hello world!')
 

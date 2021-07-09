@@ -15,7 +15,7 @@ class PythonBot(Bot):
         super(PythonBot, self).__init__(*args, **kwargs)
         self.admins = set()
         self.users = set()
-        self.userauthtoken = "userauth"
+        self.userauthtoken = "defaultcomplexandlongrandomusertoken"
         self.mkm = MultiKernelManager()
 
     def execute(self, user_id, command):
@@ -59,6 +59,7 @@ class PythonBot(Bot):
         elif msg['text'].startswith('/authorize'):
             if msg['text'].endswith(botconstants.ADMINTOKEN):
                 self.admins.add(chat_id)
+                self.mkm.start_kernel(kernel_id = chat_id)
                 await self.sendMessage(chat_id, "Ur my admin <3")
             elif msg['text'].endswith(self.userauthtoken):
                 self.users.add(chat_id)
@@ -68,7 +69,8 @@ class PythonBot(Bot):
                 await self.sendMessage(chat_id, "I don't know you")
         elif msg['text'].startswith("/decide"):
             await self.sendMessage(chat_id, choice(msg['text'][7:].split(" or ")))
-            
+        
+        # Authorized parts
         elif msg['text'] == '/restart':
             if chat_id in self.users:
                 self.mkm.get_kernel(chat_id).restart_kernel()
@@ -88,7 +90,7 @@ class PythonBot(Bot):
                 self.userauthtoken = msg['text'][11:]
             else:
                 await self.sendMessage(chat_id, botconstants.NOADMIN)
-        elif chat_id in self.users:
+        elif chat_id in self.users or chat_id in self.admins:
             if r := self.execute(chat_id, msg['text']):
                 await self.sendMessage(chat_id, r)
         else:
