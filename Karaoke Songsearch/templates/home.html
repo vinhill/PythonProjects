@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Karaoke Song Library</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<style>
+		h1 {
+			color: #33cccc;
+			font-weight: bold;
+		}
+		h2 {
+			font-size: large;
+			color: #4EA5A5;
+		}
+		.result{
+			white-space: pre-wrap;
+			font-family: Lucida Console, Courier, monospace;
+			font-size: small;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<script>
+	function myFunction() {
+		var query= $('#query').val();
+		var limit= $('#limit').val();
+		$.ajax({
+				url: "/join",
+				type: "POST",
+				data: {query:query, limit:limit}
+			}).done(function(response) {
+				var html = '<p class="result">';
+				response = response.result;
+				
+				$.each(response,function(key,val){
+					html+=val
+				});
+				html += "</p>";
+				$(".show-data").html(html);
+				});
+				$('.show-data').width(925);
+	};
+</script>
+<body>
+    <h1>Karaoke Song Library</h1>
+		
+		<label>Search: </label>
+		<input type="text" id="query" name="query" autocomplete="off">
+		<br>
+		<label>Entries: </label>
+		<input type="number" id="limit" name="limit" step="5" value="30">
+		<br>
+		<button id="Submit" onclick="myFunction()">Submit</button>
+	
+		<script>
+			var input = document.getElementById("query");
+			input.addEventListener("keyup", function(event) {
+				if (event.keyCode === 13) {
+				 event.preventDefault();
+				 document.getElementById("Submit").click();
+				}
+			});
+		</script>
+
+		<br>
+		
+		<h2>Result</h2>
+		<div class="show-data" >
+			<!-- Will be inserted through POST request -->
+		</div>
+</body>
+</html>

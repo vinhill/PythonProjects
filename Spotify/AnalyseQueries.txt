@@ -1,0 +1,5 @@
+Most popular artists where I enjoy more than two songs:
+SELECT Artists.name, count(Tracks.uri) as num, Artists.popularity FROM Artists JOIN Madeby ON Artists.uri = artist JOIN Tracks on track = Tracks.uri GROUP BY Artists.name, Artists.popularity HAVING num > 2 ORDER BY Artists.popularity DESC LIMIT 15
+
+Artists with highest number of liked songs
+SELECT name, count(track) as num FROM Artists JOIN Madeby ON artist=uri GROUP BY name ORDER BY num DESC
