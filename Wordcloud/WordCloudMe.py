@@ -35,7 +35,7 @@ freq = dict(chain(
     product(D, [35])
 ))
 
-scale = 5
+scale = 1
 
 # circular drawing area
 width, height = 400 * scale, 200 * scale
@@ -56,6 +56,12 @@ def make_wc(rs, ph):
             mask = mask
             ).generate_from_frequencies(freq)
 
+def save_as_svg(wc, path):
+    svg = wc.to_svg(embed_font=True)
+    f = open(path, "w+")
+    f.write(svg)
+    f.close()
+
 task = input("Gridsearch / iterate / show: ")
 
 if task == "Gridsearch":
@@ -71,4 +77,4 @@ else:
             plt.axis("off")
             plt.show()
         elif task == "iterate":
-            wc.to_file("cvwci{0}.png".format(i))
+            save_as_svg(wc, "cvwci{0}.svg".format(i))
