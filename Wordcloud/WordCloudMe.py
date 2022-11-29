@@ -5,9 +5,9 @@ import itertools
 import numpy as np
 
 A = "ML Python"
-B = "JavaScript Tensorflow Theory DL AI C++"
-C = "LaTeX Networks Java Bioinformatics SQL Keras"
-D = "Teaching Haskell Prolog Matplotlib MSOffice Rosalind Arduino Numpy Git Computer-Graphics"
+B = "JavaScript Keras Theory DL AI C++"
+C = "LaTeX Networks Java Bioinformatics SQL Tensorflow"
+D = "Prolog Matplotlib MSOffice Rosalind Arduino Numpy Git Vision Graphics React Node.js Angular"
 
 """
 A = "Calm Smart Rational Ambitious"
@@ -35,7 +35,7 @@ if(generate):
             prefer_horizontal = ph,
             color_func=lambda *args, **kwargs: (0,0,0),
             mask = mask
-            ).generate(txt).to_file("cvwcfs{0}rs{1}ph{2}i{3}.png".format(fs,rs,ph,i))
+            ).generate(txt).to_file("cvwcfs{0}rs{1}ph{2}i{3}.svg".format(fs,rs,ph,i))
 
 else:
     wc = WordCloud(

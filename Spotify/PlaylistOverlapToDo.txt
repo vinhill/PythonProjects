@@ -1,4 +1,0 @@
-Measures:
-Overlap of songs
-Overlap of artist occurences
-Feature closeness in contrast to average feature closeness within playlist database
