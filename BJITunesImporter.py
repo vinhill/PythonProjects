@@ -8,7 +8,7 @@ from itertools import product
 from tqdm import tqdm
 import re
 
-# login credentials
+# login credentials, outdated
 SPOTIPY_CLIENT_ID="d4cda9a688074720a0f43fc547e2dfd5"
 SPOTIPY_CLIENT_SECRET = "540fc072359d497a96b5d0ecab65fc67"
 

@@ -1,6 +1,8 @@
-# COllection of simple Python scripts
+# Collection of Simple Python Scripts
 
 Many are quite old and not of good code quality.
+
+Before making this public, I changed all credentials.
 
 ## Highligted Projects
 
