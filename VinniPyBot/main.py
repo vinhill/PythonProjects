@@ -9,6 +9,7 @@ from random import choice
 from jupyter_client.multikernelmanager import MultiKernelManager
 
 import botconstants
+from mysecrets import TOKEN, ADMINTOKEN
 
 class PythonBot(Bot):
     def __init__(self, *args, **kwargs):
@@ -57,7 +58,7 @@ class PythonBot(Bot):
         elif msg['text'] == '/help':
             await self.sendMessage(chat_id, botconstants.HELP)
         elif msg['text'].startswith('/authorize'):
-            if msg['text'].endswith(botconstants.ADMINTOKEN):
+            if msg['text'].endswith(ADMINTOKEN):
                 self.admins.add(chat_id)
                 self.mkm.start_kernel(kernel_id = chat_id)
                 await self.sendMessage(chat_id, "Ur my admin <3")
@@ -97,7 +98,7 @@ class PythonBot(Bot):
             await self.sendMessage(chat_id, "Not authorized, feels bad man.")
 
 if __name__ == "__main__":
-    bot = PythonBot(botconstants.TOKEN)
+    bot = PythonBot(TOKEN)
     
     loop = asyncio.get_event_loop()
 

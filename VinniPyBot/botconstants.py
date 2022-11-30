@@ -33,8 +33,4 @@ for i in range(10):
     print(i**2)
 """
 
-TOKEN = "1165840172:AAG6d4lYaSL9pDXKq6Vmbkp_czUhfUX52DU"
-
 NOADMIN = "You aren't my admin, don't tell me what to do."
-
-ADMINTOKEN = 'vinnissupersecretadminauthtoken'
