@@ -1,3 +1,4 @@
+
 class FASTAReader:
   
     #string input gives an alternative input source
@@ -77,6 +78,7 @@ class FASTAReader:
             res.append(dna)
         return res
 
+
 class BioInfUtils:
 
     def getUniprotFASTA(uniprot_id):
@@ -120,6 +122,7 @@ class BioInfUtils:
             aas.append( codon_dict[ rna[i:i+3] ] )
         return "".join(aas)
 
+
 class Utils:
     
     def bin_search(list, val):
@@ -134,6 +137,18 @@ class Utils:
             else:
                 l = m+1
         return (r,l)
+    
+    # first element for which comp(list element, val) is true
+    def lower_bound(list, val, comp):
+        l = 0
+        r = len(list)
+        while l < r:
+            m = (l+r)//2
+            if comp(list[m], val):
+                r = m
+            else:
+                l = m+1
+        return l
 
     def binom_coeff(n, k):
         from functools import reduce
@@ -156,3 +171,45 @@ class Utils:
     def fak(n):
         import math
         return math.factorial(n)
+    
+
+class Trie:
+    def __init__(self):
+        self.children = {}
+        self.value = None
+
+    def set(self, value):
+        self.value = value
+
+    def get(self):
+        return self.value
+
+    def append(self, label):
+        self.children[label] = Trie()
+        return self.children[label]
+    
+    def has(self, label):
+        return label in self.children
+    
+    def _add(self, path, i):
+        if len(path) == i:
+            return self
+        elif self.has(path[i]):
+            return self.children[path[i]]._add(path, i+1)
+        else:
+            return self.append(path[i])._add(path, i+1)
+    
+    def add(self, path, value):
+        n = self._add(path, 0)
+        n.set(value)
+
+    def _walk(self, path, i):
+        if len(path) == i:
+            return self
+        elif not self.has(path[i]):
+            return None
+        else:
+            return self.children[path[i]]._walk(path, i+1)
+        
+    def walk(self, path):
+        return self._walk(path, 0)
