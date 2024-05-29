@@ -2,3 +2,4 @@ __pycache__
 Spotify/mysecrets.py
 Spotify/.cache
 VinniPyBot/mysecrets.py
+env.py
