@@ -1,0 +1,321 @@
+<html xmlns="http://www.w3.org/TR/REC-html40" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="OneNote.File" name="ProgId"/>
+<meta content="Microsoft OneNote 15" name="Generator"/>
+</head>
+<body lang="en-GB" style="font-family:Calibri;font-size:11.0pt">
+
+<div style="direction:ltr;border-width:100%">
+<div style="direction:ltr;margin-top:0in;margin-left:0in;width:7.2743in">
+<div style="direction:ltr;margin-top:0in;margin-left:0in;width:7.2743in">
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold;background:yellow;mso-highlight:yellow">Neural Networks</span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt;color:#FFC000"><span style="font-weight:bold">Perceptron</span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">Idea: generalized
+
+linear model viewed as each intermediate value being a neuron</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Perceptron learning</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">For each training datapoint in random
+
+order </span><math><math><msup><mrow><mi>𝑤</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi><mo>+</mo><mn>1</mn></mrow><mo>)</mo></mrow></msup><mo>=</mo><msup><mrow><mi>𝑤</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msup><mo>−</mo><mo>(</mo><mrow><mi>𝑦</mi><mo>(</mo><mrow><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑛</mi></mrow></msub><mo>;</mo><msup><mrow><mi>𝑤</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msup></mrow><mo>)</mo><mo>−</mo><msub><mrow><mi>𝑡</mi></mrow><mrow><mi>𝑛</mi></mrow></msub></mrow><mo>)</mo><mi>𝜙</mi><mo>(</mo><mrow><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑛</mi></mrow></msub></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">If
+
+output incorrectly outputs zero, add input vector to weight vector</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">If
+
+output incorrectly outputs one, subtract input vector to weight vector</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">+Converges
+
+to a correct solution, if one exists</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Note:
+
+similar to LMS rule. Via SGD, regularizers and other loss functions are
+
+possible</p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">-Only linear decision bounds, good input features </span><math><math><mi>𝑥</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>and basis function </span><math><math><mi>𝜙</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>need to be selected</span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt;color:#FFC000"><span style="font-weight:bold">Multi-Layer Perceptron MLP</span></p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Idea: learn the feature representation / basis function </span><math><math><mi>𝜙</mi></math></math></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">2-layer MLP is <span style="font-weight:bold">universal approximator</span> "any continuous
+
+function on fixed domain to arbitrary precision"</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">But:
+
+Shallow networks are inefficient at representing complex functions (lots of
+
+hidden units)</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Training</span></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">More
+
+difficult, what should hidden units compute? -&gt; gradient descent, propagate
+
+error</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Especially
+
+in deep networks, initial layers often don’t get good gradient updates</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">-&gt; Update weights in direction of
+
+gradient </span><math><math><mo>∇</mo><mi>𝐸</mi><mo>(</mo><mi>𝑊</mi><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>for </span><math><math><mi mathvariant="normal">E</mi><mo>(</mo><mrow><mi>𝑊</mi></mrow><mo>)</mo><mo>=</mo><msub><mo>∑</mo><mrow><mi>𝑛</mi></mrow></msub><mrow><mi>𝐿</mi><mo>(</mo><mrow><msub><mrow><mi>𝑡</mi></mrow><mrow><mi>𝑛</mi></mrow></msub><mo>,</mo><mi>𝑦</mi><mo>(</mo><mrow><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑛</mi></mrow></msub></mrow><mo>)</mo></mrow><mo>)</mo></mrow><mo>+</mo><mi>𝜆</mi><mi mathvariant="normal">Ω</mi><mo>(</mo><mrow><mi>𝑊</mi></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Numerical differentiation: "finite
+
+differences </span><math><math><mfrac><mrow><mo>∂</mo><mi>𝑓</mi></mrow><mrow><mi>𝜕</mi><mi>𝑥</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>𝑓</mi><mo>(</mo><mrow><mi>𝑥</mi><mo>+</mo><mi>h</mi></mrow><mo>)</mo><mo>−</mo><mi>𝑓</mi><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow><mrow><mi>h</mi></mrow></mfrac></math></math><span lang="en-GB" style="font-family:&quot;Cambria Math&quot;">"</span></p>
+<p style="margin:0in;margin-left:.75in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Make small change to </span><math><math><mi>𝑊</mi></math></math><span lang="en-GB" style="font-family:Calibri">, look how </span><math><math><mi>𝐸</mi><mo>(</mo><mrow><mi>𝑊</mi></mrow><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>was impacted, update </span><math><math><mi>𝑊</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>-&gt; very inefficient</span></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Analytical
+
+differentiation: compute gradients by applying rules of differentiation</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">In
+
+the naive way, i.e. for each variable individually, we have to sum over all
+
+paths between variable and output. This is exponential in network depth and
+
+redundant.</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Backpropagation </span>"Incremental analytical
+
+differentiation from the back"</p>
+<div style="direction:ltr">
+<table border="1" cellpadding="0" cellspacing="0" style="direction:ltr;   border-collapse:collapse;border-style:solid;border-color:#A3A3A3;border-width:   1pt;margin-left:1.0833in" summary="" title="" valign="top">
+<tr>
+<td style="border-style:solid;border-color:#A3A3A3;border-width:1pt;    vertical-align:top;width:1.777in;padding:2.0pt 3.0pt 2.0pt 3.0pt">
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">Forward pass</p>
+<p style="margin:0in;font-size:11.0pt"><math><math><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mn>0</mn><mo>)</mo></mrow></msup><mo>=</mo><mi>𝑥</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span></span></p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">for </span><math><math><mi>𝑘</mi><mo>=</mo><mn>1</mn><mo>,</mo><mo>…</mo><mo>,</mo><mi>𝐿</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>do</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><math><math><msup><mrow><mi>𝑧</mi></mrow><mrow><mo>(</mo><mi>𝑘</mi><mo>)</mo></mrow></msup><mo>=</mo><msup><mrow><mi>𝑊</mi></mrow><mrow><mo>(</mo><mi>𝑘</mi><mo>)</mo></mrow></msup><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi><mo>−</mo><mn>1</mn></mrow><mo>)</mo></mrow></msup></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span></span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><math><math><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mi>𝑘</mi><mo>)</mo></mrow></msup><mo>=</mo><msub><mrow><mi>𝑔</mi></mrow><mrow><mi>𝑘</mi></mrow></msub><mo>(</mo><mrow><msup><mrow><mi>𝑧</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msup></mrow><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span></span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">endfor</p>
+<p lang="x-IV_mathan" style="margin:0in;font-family:&quot;Cambria Math&quot;;font-size:11.0pt"><math><math><mi>𝐸</mi><mo>=</mo><mi>𝐿</mi><mo>(</mo><mrow><mi>𝑡</mi><mo>,</mo><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mi>𝐿</mi><mo>)</mo></mrow></msup></mrow><mo>)</mo><mo>+</mo><mi>𝜆</mi><mi mathvariant="normal">Ω</mi></math></math></p>
+</td>
+<td style="border-style:solid;border-color:#A3A3A3;border-width:1pt;    vertical-align:top;width:3.4736in;padding:2.0pt 3.0pt 2.0pt 3.0pt">
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">Backward pass</p>
+<p style="margin:0in;font-size:11.0pt"><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mi>𝐿</mi><mo>)</mo></mrow></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>𝜕</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mrow><mi>𝐿</mi></mrow><mo>)</mo></mrow></msup></mrow></mfrac><mi>𝐿</mi><mo>(</mo><mrow><mi>𝑡</mi><mo>,</mo><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mi>𝐿</mi><mo>)</mo></mrow></msup></mrow><mo>)</mo><mo>+</mo><mi>𝜆</mi><mo>⋅</mo><mfrac><mrow><mi>𝜕</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mrow><mi>𝐿</mi></mrow><mo>)</mo></mrow></msup></mrow></mfrac><mi mathvariant="normal">Ω</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span><br/>
+
+    for </span><math><math><mi>𝑘</mi><mo>=</mo><mi>𝐿</mi><mo>,</mo><mo>…</mo><mo>,</mo><mn>1</mn></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>do</span></p>
+<p style="margin:0in;font-size:11.0pt"><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msubsup><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mo>(</mo><mi>𝑘</mi><mo>)</mo></mrow></msubsup></mrow></mfrac><mo>=</mo><msubsup><mrow><mi>𝑔</mi></mrow><mrow><mi>𝑘</mi></mrow><mrow><mo>′</mo></mrow></msubsup><mo>(</mo><mrow><msubsup><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup></mrow><mo>)</mo><mo>⋅</mo><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msubsup><mrow><mi>𝑦</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup></mrow></mfrac><mo>→</mo><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msup></mrow></mfrac><mo>⊙</mo><msup><mrow><mi>𝑔</mi></mrow><mrow><mo>′</mo></mrow></msup><mo>(</mo><mrow><msup><mrow><mi>𝑧</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msup></mrow><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span></span></p>
+<p style="margin:0in;font-size:11.0pt"><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msubsup><mrow><mi>𝑦</mi></mrow><mrow><mi>𝑖</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi><mo>−</mo><mn>1</mn></mrow><mo>)</mo></mrow></msubsup></mrow></mfrac><mo>=</mo><msub><mo>∑</mo><mrow><mi>𝑗</mi></mrow></msub><mrow><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑗</mi><mi>𝑖</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup><mo>⋅</mo><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msubsup><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup></mrow></mfrac></mrow><mo>→</mo><msup><mrow><mi>𝑊</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo><mi>𝑇</mi></mrow></msup><mo>⋅</mo><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑧</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msup></mrow></mfrac></math></math><span lang="de" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span></span></p>
+<p lang="x-IV_mathan" style="margin:0in;font-family:&quot;Cambria Math&quot;;font-size:11.0pt"><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑗</mi><mi>𝑖</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup></mrow></mfrac><mo>=</mo><msubsup><mrow><mi>𝑦</mi></mrow><mrow><mi>𝑖</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi><mo>−</mo><mn>1</mn></mrow><mo>)</mo></mrow></msubsup><mo>⋅</mo><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msubsup><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>𝜆</mi><mi>𝑑</mi><mi mathvariant="normal">Ω</mi></mrow><mrow><mi>𝑑</mi><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑗</mi><mi>𝑖</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msubsup></mrow></mfrac><mo>→</mo><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑧</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msup></mrow></mfrac><msup><mrow><mi>𝑦</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi><mo>−</mo><mn>1</mn></mrow><mo>)</mo><mi>𝑇</mi></mrow></msup><mo>+</mo><mfrac><mrow><mi>𝜆</mi><mi>𝜕</mi><mi mathvariant="normal">Ω</mi></mrow><mrow><mi>𝜕</mi><msup><mrow><mi>𝑊</mi></mrow><mrow><mo>(</mo><mrow><mi>𝑘</mi></mrow><mo>)</mo></mrow></msup></mrow></mfrac></math></math><span style="font-style:italic"><span style="mso-spacerun:yes"> </span></span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">endfor</p>
+</td>
+</tr>
+</table>
+</div>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt;color:#FFC000"><span style="font-weight:bold">AutoDiff on computational graphs</span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt">Instead of deriving
+
+backprop for each new architecture, implement it for any computational graph</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Computational graph</span>: graph representation of
+
+mathematical expression</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Derivatives </span>in computational graphs</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Chain </span><math><math><mi>𝑦</mi><mo>=</mo><mi>𝑓</mi><mo>(</mo><mrow><mi>𝑧</mi></mrow><mo>)</mo><mo>=</mo><mi>𝑓</mi><mo>(</mo><mrow><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑥</mi></mrow><mo>)</mo></mrow><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>then </span><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝑦</mi></mrow><mrow><mi>𝜕</mi><mi>𝑥</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>𝜕</mi><mi>𝑦</mi></mrow><mrow><mi>𝜕</mi><mi>𝑧</mi></mrow></mfrac><mfrac><mrow><mi>𝜕</mi><mi>𝑧</mi></mrow><mrow><mi>𝜕</mi><mi>𝑥</mi></mrow></mfrac></math></math><span lang="en-GB" style="font-family:Calibri">, sum </span><math><math><mi>𝑦</mi><mo>=</mo><msub><mrow><mi>𝑧</mi></mrow><mrow><mn>1</mn></mrow></msub><mo>+</mo><msub><mrow><mi>𝑧</mi></mrow><mrow><mn>2</mn></mrow></msub><mo>=</mo><mi>𝑓</mi><mo>(</mo><mrow><mi>𝑥</mi></mrow><mo>)</mo><mo>+</mo><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑥</mi></mrow><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>then </span><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝑦</mi></mrow><mrow><mi>𝜕</mi><mi>𝑥</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>𝜕</mi><mi>𝑦</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑧</mi></mrow><mrow><mn>1</mn></mrow></msub></mrow></mfrac><mfrac><mrow><mi>𝜕</mi><msub><mrow><mi>𝑧</mi></mrow><mrow><mn>1</mn></mrow></msub></mrow><mrow><mi>𝜕</mi><mi>𝑥</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mo>∂</mo><mi mathvariant="normal">y</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑧</mi></mrow><mrow><mn>2</mn></mrow></msub></mrow></mfrac><mfrac><mrow><mi>𝜕</mi><msub><mrow><mi>𝑧</mi></mrow><mrow><mn>2</mn></mrow></msub></mrow><mrow><mi>𝜕</mi><mi>𝑥</mi></mrow></mfrac></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Forward mode diff</span><span lang="en-GB" style="font-family:Calibri">: starting at input </span><math><math><mi>𝑋</mi></math></math><span lang="en-GB" style="font-family:Calibri">, apply </span><math><math><mi>𝜕</mi><maction actiontype="lit"><mo>/</mo></maction><mi>𝜕</mi><mi>𝑋</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>successively till the output nodes in </span><math><math><mi>𝑂</mi><mo>(</mo><mrow><mo>#</mo><mi>𝑒</mi><mi>𝑑</mi><mi>𝑔</mi><mi>𝑒</mi><mi>𝑠</mi></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Reverse mode diff</span><span lang="en-GB" style="font-family:Calibri">: starting at output </span><math><math><mi>𝑌</mi></math></math><span lang="en-GB" style="font-family:Calibri">, apply </span><math><math><mi>𝜕</mi><mi>𝑌</mi><maction actiontype="lit"><mo>/</mo></maction><mi>𝜕</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>successively till the input nodes in </span><math><math><mi>𝑂</mi><mo>(</mo><mrow><mo>#</mo><mi>𝑒</mi><mi>𝑑</mi><mi>𝑔</mi><mi>𝑒</mi><mi>𝑠</mi></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">-&gt;
+
+factored: don’t differentiate over all possible paths, but merge them at every
+
+node (-&gt; successive process)</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt;color:#FFC000"><span style="font-weight:bold">Tricks and Improvements</span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Practical issue: </span>numerical precision esp.
+
+floating point numbers with very different magnitudes</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">-&gt; e.g. Softmax trick: transform</span><math><math><mrow><mrow><mi mathvariant="normal">ln</mi></mrow><mo>⁡</mo><mrow><mfrac><mrow><mrow><mrow><mi mathvariant="normal">exp</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi></mrow><mrow><mi>𝑇</mi></mrow></msubsup><mi>𝑥</mi></mrow><mo>)</mo></mrow></mrow></mrow><mrow><msub><mo>∑</mo><mrow><mi>𝑗</mi></mrow></msub><mrow><mrow><mrow><mi mathvariant="normal">exp</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mi>𝑇</mi></mrow></msubsup><mi>𝑥</mi></mrow><mo>)</mo></mrow></mrow></mrow></mrow></mfrac></mrow></mrow></math></math><span lang="en-GB" style="font-family:Calibri"> into </span><math><math><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi></mrow><mrow><mi>𝑇</mi></mrow></msubsup><mi>𝑥</mi><mo>−</mo><mrow><mrow><mi mathvariant="normal">ln</mi></mrow><mo>⁡</mo><mrow><msub><mo>∑</mo><mrow><mi>𝑗</mi></mrow></msub><mrow><mrow><mrow><mi mathvariant="normal">exp</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑗</mi></mrow><mrow><mi>𝑇</mi></mrow></msubsup><mi>𝑥</mi></mrow><mo>)</mo></mrow></mrow></mrow></mrow></mrow></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">-&gt; e.g. Softmax trick: subtract
+
+largest weight vector </span><math><math><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑖</mi></mrow></msub></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>from all others, as </span><math><math><mi>𝑠</mi><mi>𝑜</mi><mi>𝑓</mi><mi>𝑡</mi><mi>𝑚</mi><mi>𝑎</mi><mi>𝑥</mi><mo>(</mo><mrow><mover accent="true"><mrow><mi>𝑎</mi></mrow><mo>⃗</mo></mover><mo>+</mo><mi>𝑏</mi></mrow><mo>)</mo><mo>=</mo><mi>𝑠</mi><mi>𝑜</mi><mi>𝑓</mi><mi>𝑡</mi><mi>𝑚</mi><mi>𝑎</mi><mi>𝑥</mi><mo>(</mo><mrow><mover accent="true"><mrow><mi>𝑎</mi></mrow><mo>⃗</mo></mover></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Stochastic / Minibatch / Batch</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Batch: </span><math><math><mo>∇</mo><mi>𝐸</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>over whole dataset -&gt; simpler theoretical
+
+analysis, well understood convergence</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Stochastic: </span><math><math><mo>∇</mo><mi>𝐸</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>over single datapoints -&gt; faster, better
+
+results, noisy, inefficient matrix-vector product</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Minibatch: </span><math><math><mo>∇</mo><mi>𝐸</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>over small batches of increasing size
+
+"partition and shuffle dataset"</span></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">Note:
+
+loss needs to be normalized by minibatch size to keep gradients comparable</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">+faster
+
+than batch, more stable than stochastic, efficient matmul</p>
+<p style="margin:0in;margin-left:.75in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">+takes advantage of redundancies (batch
+
+has similar </span><math><math><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑛</mi></mrow></msub></math></math><span lang="en-GB" style="font-family:Calibri">, minibatch probabily still contains all
+
+classes)</span></p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;  font-family:Calibri">Choosing learning rate </span><math><math><mi>𝜂</mi></math></math><span lang="en-GB" style="font-family:Calibri">: Too small or too large? Slow progress.
+
+Way too large </span><math><math><mi>𝜂</mi><mo>&gt;</mo><mn>2</mn><msub><mrow><mi>𝜂</mi></mrow><mrow><mi>𝑜</mi><mi>𝑝</mi><mi>𝑡</mi></mrow></msub></math></math><span lang="en-GB" style="font-family:Calibri">? Increasing error</span></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">LR Reduction</span>: train till convergence, reduce LR
+
+by 10x, repeat 1-3 times</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Reduces
+
+impact of noisy gradient updates, can slow down training (if done too soon)</p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;  font-family:Calibri">Momentum </span><math><math><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi>𝜏</mi><mo>+</mo><mn>1</mn></mrow><mo>)</mo></mrow></msubsup><mo>=</mo><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msubsup><mo>+</mo><mi mathvariant="normal">Δ</mi><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msubsup></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>for </span><math><math><mi mathvariant="normal">Δ</mi><msup><mrow><mi mathvariant="normal">w</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msup><mo>=</mo><mi>𝛼</mi><mi mathvariant="normal">Δ</mi><msup><mrow><mi>𝑤</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi><mo>−</mo><mn>1</mn></mrow><mo>)</mo></mrow></msup><mo>−</mo><mi>𝜂</mi><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi><mo>(</mo><mrow><mi>𝑊</mi></mrow><mo>)</mo></mrow><mrow><mi>𝜕</mi><mi>𝑤</mi></mrow></mfrac></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">"Use
+
+gradient to update velocity instead of position in the high dimensional
+
+space"</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">+prevents
+
+overshooting, smooths out noisy gradient updates, prevents oscillations, speeds
+
+up training</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">+build
+
+up speed in directions with gentle but consistent gradient</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Note: gradients initially often large
+
+-&gt; start at </span><math><math><mi mathvariant="normal">α</mi><mo>≈</mo><mn>0.5</mn></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>and go up to </span><math><math><mi>𝛼</mi><mo>≈</mo><mn>0.9</mn></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>with time</span></p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Idea: adaptive learning rate, i.e. one global </span><math><math><mi>𝜂</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>multiplied by weight-specific gain values</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Appropriate </span><math><math><mi>𝜂</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>can vary a lot between layers because of
+
+varying gradient magnitude, i.e. because of fan-in</span></p>
+<p style="margin:0in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;  font-family:Calibri">RMSProp</span><span lang="en-GB" style="font-family:Calibri">: </span><math><math><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi><mo>+</mo><mn>1</mn></mrow><mo>)</mo></mrow></msubsup><mo>=</mo><msubsup><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msubsup><mo>−</mo><mfrac><mrow><mi>𝜂</mi></mrow><mrow><msqrt><mi>𝑀</mi><mi>𝑆</mi><msup><mrow><mi>𝐺</mi></mrow><mrow><mo>(</mo><mrow><mi>𝜏</mi></mrow><mo>)</mo></mrow></msup></msqrt></mrow></mfrac><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow></msub></mrow></mfrac></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>for </span><math><math><mi>𝑀</mi><mi>𝑆</mi><msup><mrow><mi>𝐺</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi></mrow><mo>)</mo></mrow></msup><mo>=</mo><mi>𝛼</mi><mi>𝑀</mi><mi>𝑆</mi><msup><mrow><mi>𝐺</mi></mrow><mrow><mo>(</mo><mrow><mi mathvariant="normal">τ</mi><mo>−</mo><mn>1</mn></mrow><mo>)</mo></mrow></msup><mo>+</mo><mo>(</mo><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">α</mi></mrow><mo>)</mo><msup><mrow><mo>(</mo><mrow><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow></msub></mrow></mfrac></mrow><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">"Gradient
+
+magnitude can vary a lot, so use a running average of previous gradients for
+
+normalization"</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Be patient</span>: training often doesn't get stuck
+
+but rather makes slow progress because of saddle points</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Shuffling</span>: models learns best from unfamiliar
+
+samples -&gt; shuffle, increase frequency of samples with high error</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Augmentation</span>: add synthetic variations of data
+
+to increase dataset size</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">"Datapoints
+
+are samples from the domain space. Augmentations blur these to better capture
+
+the space"</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Normalization</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">"</span><math><math><msub><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑖</mi></mrow></msub><mo>=</mo><msub><mo>∑</mo><mrow><mi>𝑘</mi></mrow></msub><mrow><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow></msub><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑘</mi></mrow></msub></mrow></math></math><span lang="en-GB" style="font-family:Calibri">, </span><math><math><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑘</mi><mi>𝑗</mi></mrow></msub></mrow></mfrac><mo>=</mo><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑘</mi></mrow></msub><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑖</mi></mrow></msub></mrow></mfrac></math></math><span lang="en-GB" style="font-family:Calibri">. If all </span><math><math><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑘</mi></mrow></msub><mo>≥</mo><mn>0</mn></math></math><span lang="en-GB" style="font-family:Calibri">, weights </span><math><math><msub><mrow><mi>𝑤</mi></mrow><mrow><mn>0</mn><mi>𝑗</mi></mrow></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝐾</mi><mi>𝑗</mi></mrow></msub></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>change into same direction -&gt; slow"</span></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Convergence
+
+fastest if inputs have zero mean, are uncorrelated and have same covariance</p>
+<p style="margin:0in;margin-left:.75in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">-&gt; centre mean, scale to
+
+unit-covariance using </span><math><math><mi>𝜇</mi><mo>,</mo><mi mathvariant="normal">Σ</mi></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>of training data, maybe decorrelate using PCA</span></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Note:
+
+might not be applicable to CNNs, as brightness difference between pixels would
+
+change</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Batch normalization</span></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Additional
+
+layer that centres and scales activations of the previous layer over each
+
+minibatch</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">For
+
+test-time, normalization parameters are learned (e.g. moving-average over
+
+training data)</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Improves
+
+convergence of training but introduces additional hyperparameters</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Common nonlinearities / activations</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Sigmoid </span><math><math><mi mathvariant="normal">σ</mi><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>1</mn><mo>+</mo><mrow><mrow><mi mathvariant="normal">exp</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mo>−</mo><mi>𝑎</mi><mo>)</mo></mrow></mrow></mrow></mfrac><mo>∈</mo><mo>[</mo><mrow><mn>0,1</mn></mrow><mo>]</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span></span></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">-Saturation
+
+causes zero gradients, deteriorates to linear for small activations</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">-Doesn't
+
+preserve zero-mean nor unit-variance</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Softmax </span><math><math><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo><mo>=</mo><mfrac><mrow><mrow><mrow><mi mathvariant="normal">exp</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><mo>−</mo><msub><mrow><mi>𝑎</mi></mrow><mrow><mi>𝑖</mi></mrow></msub></mrow><mo>)</mo></mrow></mrow></mrow><mrow><msub><mo>∑</mo><mrow><mi>𝑗</mi></mrow></msub><mrow><mrow><mrow><mi mathvariant="normal">exp</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><mo>−</mo><msub><mrow><mi>𝑎</mi></mrow><mrow><mi>𝑗</mi></mrow></msub></mrow><mo>)</mo></mrow></mrow></mrow></mrow></mfrac></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>"multiclass sigmoid"</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Hyperbolic tangent </span><math><math><mrow><mrow><mi mathvariant="normal">tanh</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mn>2</mn><mi mathvariant="normal">σ</mi><mo>(</mo><mrow><mn>2</mn><mi>𝑎</mi></mrow><mo>)</mo><mo>−</mo><mn>1</mn><mo>∈</mo><mo>[</mo><mrow><mo>−</mo><mn>1,1</mn></mrow><mo>]</mo></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">"Sigmoid
+
+scaled to have range [-1, 1] and be symmetric"</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">+Often
+
+faster convergence, because zero-mean is preserved</p>
+<p style="margin:0in;margin-left:.75in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">+Use </span><math><math><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo><mo>=</mo><mn>1.7159</mn><mrow><mrow><mi mathvariant="normal">tanh</mi></mrow><mo>⁡</mo><mrow><mo>(</mo><mrow><mfrac><mrow><mn>2</mn></mrow><mrow><mn>3</mn></mrow></mfrac><mi>𝑎</mi></mrow><mo>)</mo></mrow></mrow></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>to also preserve unit-variance (-&gt;
+
+reflection point at </span><math><math><mo>(</mo><mn>1,1</mn><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri">)</span></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">-Saturation
+
+causes zero gradients, deteriorates to linear for small activations</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">ReLU </span><math><math><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo><mo>=</mo><mrow><mrow><mi mathvariant="normal">max</mi></mrow><mo>⁡</mo><mrow><mo>{</mo><mrow><mn>0</mn><mo>,</mo><mi>𝑎</mi></mrow><mo>}</mo></mrow></mrow></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">+Computational
+
+graph needs less memory, as ReLU output can refer back to its input</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">+Gradient
+
+propagated with constant factor zero or one -&gt; less vanishing / exploding
+
+gradient</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">-Stuck
+
+at zero: some units might always output zero -&gt; get zero gradients -&gt;
+
+don't learn</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">-Offset
+
+bias: doesn't preserve zero-mean, as range is [0, 1]</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Leaky ReLU </span><math><math><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo><mo>=</mo><mrow><mrow><mi mathvariant="normal">max</mi></mrow><mo>⁡</mo><mrow><mo>{</mo><mrow><mi>𝛽</mi><mi>𝑎</mi><mo>,</mo><mi>𝑎</mi></mrow><mo>}</mo></mrow></mrow></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>for small hyperparameter or learnable
+
+parameter </span><math><math><mi>𝛽</mi></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">+Avoids
+
+stuck-at-zero and decreases offset bias</p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">ELU </span><math><math><mi>𝑔</mi><mo>(</mo><mrow><mi>𝑎</mi></mrow><mo>)</mo><mo>=</mo><mo>{</mo><mrow><mtable><mtr><mtd><mrow><maligngroup/><mi>𝑎</mi><mo>,</mo><mi>𝑎</mi><mn>0</mn></mrow></mtd></mtr><mtr><mtd><mrow><maligngroup/><msup><mrow><mi>𝑒</mi></mrow><mrow><mi>𝑎</mi></mrow></msup><mo>−</mo><mn>1</mn><mo>,</mo><mi>𝑎</mi><mo>≤</mo><mn>0</mn></mrow></mtd></mtr></mtable></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">+Avoids
+
+stuck-at-zero, avoids offset bias for correct scaling</p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">-Slightly
+
+harder computation, output must be stored in the computational graph again</p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Initialization</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">"Good weights lead to outputs in
+
+the linear domain of </span><math><math><mi>𝜎</mi></math></math><span lang="en-GB" style="font-family:Calibri">, avoid zero gradients, avoid covariance
+
+shift"</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Let </span><math><math><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑖</mi><mi>𝑛</mi></mrow></msub></math></math><span lang="en-GB" style="font-family:Calibri">, </span><math><math><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑜</mi><mi>𝑢</mi><mi>𝑡</mi></mrow></msub></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>be the number of input, output connections one
+
+unit has</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">LeCun</span><span lang="en-GB" style="font-family:Calibri">: for normalized inputs, scaled tanh,
+
+draw weights from uniform distribution with </span><math><math><mi mathvariant="normal">μ</mi><mo>=</mo><mn>0</mn><mo>,</mo><msup><mrow><mi mathvariant="normal">σ</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑖</mi><mi>𝑛</mi></mrow></msub></mrow></mfrac></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Note: for uniform distribution </span><math><math><mo>[</mo><mi>𝑎</mi><mo>,</mo><mi>𝑏</mi><mo>]</mo></math></math><span lang="en-GB" style="font-family:Calibri">, it is </span><math><math><msup><mrow><mi mathvariant="normal">σ</mi></mrow><mrow><mn>2</mn></mrow></msup><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>12</mn></mrow></mfrac><msup><mrow><mo>(</mo><mrow><mi>𝑏</mi><mo>−</mo><mi>𝑎</mi></mrow><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></math></math><span lang="en-GB" style="font-family:Calibri">. This was wrong in some early libraries</span></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">Glorot &amp; Bengio</span><span lang="en-GB" style="font-family:Calibri"> choose </span><math><math><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><mi>𝑤</mi></mrow><mo>)</mo><mo>=</mo><mfrac><mrow><mn>2</mn></mrow><mrow><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑖</mi><mi>𝑛</mi></mrow></msub><mo>+</mo><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑜</mi><mi>𝑢</mi><mi>𝑡</mi></mrow></msub></mrow></mfrac></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-family:Calibri;font-size:11.0pt">Assume
+
+inputs and outputs have zero-mean, inputs and weights are iid</p>
+<p style="margin:0in;margin-left:.75in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Then for </span><math><math><msub><mrow><mi>𝑦</mi></mrow><mrow><mi>𝑗</mi></mrow></msub><mo>=</mo><mover accent="true"><mrow><mi>𝑤</mi></mrow><mo>⃗</mo></mover><mover accent="true"><mrow><mi>𝑥</mi></mrow><mo>⃗</mo></mover></math></math><span lang="en-GB" style="font-family:Calibri">, </span><math><math><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑖</mi></mrow></msub><msub><mrow><mi>𝑥</mi></mrow><mrow><mi>𝑖</mi></mrow></msub></mrow><mo>)</mo><msup><mrow><mo>=</mo></mrow><mrow><mi>𝑖</mi><mi>𝑖</mi><mi>𝑑</mi></mrow></msup><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑖</mi></mrow></msub></mrow><mo>)</mo></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>and so, </span><math><math><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><msub><mrow><mi>𝑦</mi></mrow><mrow><mi>𝑗</mi></mrow></msub></mrow><mo>)</mo><mo>=</mo><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑖</mi><mi>𝑛</mi></mrow></msub><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑖</mi></mrow></msub></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.75in;font-size:11.0pt"><span lang="en-GB" style="font-family:Calibri">Similarly for </span><math><math><msub><mrow><mi>𝑧</mi></mrow><mrow><mi>𝑘</mi></mrow></msub><mo>=</mo><mover accent="true"><mrow><mi>𝑤</mi></mrow><mo>⃗</mo></mover><mover accent="true"><mrow><mi>𝑦</mi></mrow><mo>⃗</mo></mover></math></math><span lang="en-GB" style="font-family:Calibri"><span style="mso-spacerun:yes"> </span>during backprop </span><math><math><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><mfrac><mrow><mi>𝜕</mi><mi>𝐸</mi></mrow><mrow><mi>𝜕</mi><msub><mrow><mi>𝑦</mi></mrow><mrow><mi>𝑗</mi></mrow></msub></mrow></mfrac></mrow><mo>)</mo><mo>=</mo><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑜</mi><mi>𝑢</mi><mi>𝑡</mi></mrow></msub><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><msub><mrow><mi>𝑤</mi></mrow><mrow><mi>𝑗</mi></mrow></msub></mrow><mo>)</mo></math></math></p>
+<p style="margin:0in;margin-left:.375in;font-size:11.0pt"><span lang="en-GB" style="font-weight:bold;font-family:Calibri">He</span><span lang="en-GB" style="font-family:Calibri"> et al.: For ReLU (because not
+
+symmetric, not linear at zero), draw weights such that </span><math><math><mi>𝑉</mi><mi>𝑎</mi><mi>𝑟</mi><mo>(</mo><mrow><mi>𝑤</mi></mrow><mo>)</mo><mo>=</mo><mfrac><mrow><mn>2</mn></mrow><mrow><msub><mrow><mi>𝑛</mi></mrow><mrow><mi>𝑖</mi><mi>𝑛</mi></mrow></msub></mrow></mfrac></math></math></p>
+<p style="margin:0in;font-family:Calibri;font-size:11.0pt"><span style="font-weight:bold">Dropout</span></p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">Randomly
+
+switch off a fixed percentage of all units during training</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">During
+
+test-time, multiply activations by dropout rate to keep overall activation
+
+magnitude similar</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">+Redundancies,
+
+network relies less on single units, units compute more useful features</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">+Better
+
+generalization, less overfitting, more robustness</p>
+<p style="margin:0in;margin-left:.375in;font-family:Calibri;font-size:11.0pt">-&gt;
+
+Effectively trains multiple different versions of one network, forms a kind of
+
+ensemble</p>
+</div>
+</div>
+</div>
+
+</body>
+</html>
